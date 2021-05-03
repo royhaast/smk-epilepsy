@@ -1,6 +1,13 @@
 # Snakemake workflow: `smk-epilepsy`
 Snakemake workflow for processing data from the 7T epilepsy studies at CEMEREM/CRMBM, Marseille
 
+- [x] Set up BIDs conversion
+- [ ] Incorporate MP2RAGE processing
+- [ ] Connectivity analyses
+
+## Prequirements:
+- Singularity and containers
+
 ## Authors
 
 * Roy AM Haast @royhaast 
