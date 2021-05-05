@@ -15,8 +15,7 @@ rule prepare_tar:
     output:
         tmpdir = directory('tar/sub-{subject}/tmp')
     params:
-        filters = config['include'],
-        dicom2tar = config['containers']['dicom2tar']
+        filters = config['include']
     run:
         import os, re, fnmatch
         

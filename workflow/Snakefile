@@ -23,3 +23,7 @@ rule all:
 include: 'rules/bids.smk'
 
 # Other rules, e.g., MP2RAGE processing
+# include: 'rules/mp2rage.smk'
+
+# Generate dummy fieldmap volumes for SDC by fMRIprep
+include: 'rules/rsfmri.smk'

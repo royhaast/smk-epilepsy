@@ -3,6 +3,9 @@ bids_decoder: resources/bids_decoder.csv
 data:
     raw: /DATA_CEMEREM/data/protocols/magnetom/brain
     tar: /home/rhaast/01_PROJECTS/epilepsy/tar
+    mp2rage:
+        - /DATA_RAY/CNS/QSM/QSM_summary/Images
+        - /DATA_RAY/CNS/QSM/qSeg7T
 
 include:
     - '*b1map*'
@@ -21,3 +24,4 @@ heuristics: /home/rhaast/00_SOFTWARE/tar2bids/heuristics/cemerem_base.py
 containers:
     dicom2tar: /home/rhaast/00_SOFTWARE/containers/khanlab_dicom2tar_v0.0.5.sif
     tar2bids: /home/rhaast/00_SOFTWARE/containers/khanlab_tar2bids_latest.sif
+    fmriprep: /home/rhaast/00_SOFTWARE/containers/poldrack_fmriprep_latest.sif
