@@ -1,0 +1,37 @@
+bids_decoder: resources/bids_decoder_filtered.csv
+
+# For local processing (i.e., dicom to bids)
+# data:
+#     raw: /DATA_CEMEREM/data/protocols/magnetom/brain
+#     tar: /home/rhaast/01_PROJECTS/epilepsy/tar
+#     mp2rage:
+#         - /DATA_RAY/CNS/QSM/QSM_summary/Images
+#         - /DATA_RAY/CNS/QSM/qSeg7T
+
+# include:
+#     - '*b1map*'
+#     - '*mp2rage*'
+#     - '*flaws*'
+#     - '*qsm*separated*'
+#     - '*space*'
+#     - '*ep2d*'
+#     - '*dti*2shells'
+#     - '*23na*'
+#     - '*modified-spokes'
+
+# tar2bids: /home/rhaast/00_SOFTWARE/tar2bids/tar2bids
+# heuristics: /home/rhaast/00_SOFTWARE/tar2bids/heuristics/cemerem_base.py
+
+# containers:
+#     dicom2tar: /home/rhaast/00_SOFTWARE/containers/khanlab_dicom2tar_v0.0.5.sif
+#     tar2bids: /home/rhaast/00_SOFTWARE/containers/khanlab_tar2bids_latest.sif
+#     gradcorrect: /home/rhaast/00_SOFTWARE/containers/khanlab_gradcorrect_latest.sif
+#     fmriprep: /home/rhaast/00_SOFTWARE/containers/poldrack_fmriprep_latest.sif
+
+# For Graham
+containers:
+    gradcorrect: /project/6050199/akhanf/singularity/khanlab_gradcorrect_latest.sif
+    freesurfer: /project/6050199/akhanf/singularity/bids-apps/pwighton_freesurfer_7.1.0.sif
+    fmriprep: /project/6050199/akhanf/singularity/bids-apps/poldracklab_fmriprep_20.2.0.sif
+
+gradientfile: /resources/coeff_SC72CD.grad

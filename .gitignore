@@ -1,0 +1,12 @@
+.*
+!/.gitignore
+!/.gitattributes
+/resources/*
+/work/*
+/bids/*
+/deriv/*
+/tar/*
+/logs/*
+/scripts/presurfer/spm12/*
+/scripts/skullstripping/*
+/scripts/mprageise/*

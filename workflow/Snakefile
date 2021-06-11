@@ -1,0 +1,31 @@
+# Snakefile
+import os, re, glob, fnmatch
+import pandas as pd
+
+configfile: 'config/config.yml'
+
+# Decode original IDs into new IDs
+recoding_keys = pd.read_csv(config['bids_decoder'])
+
+subjects = recoding_keys['bids'] #['P01','P03','P04','P05']
+subjects  = [ '{:03d}'.format(i) for i in recoding_keys['bids'] ]
+
+recoding_iterator = zip(subjects,recoding_keys['dicom'])
+recoding_dict = dict(recoding_iterator)
+
+# Expected output
+rule all:
+    input:
+        # expand('tar/sub-{subject}/sub-{subject}_tar.files', subject=subjects),
+        # expand('bids/sub-{subject}/tar2bids.done', subject=subjects),
+        expand('deriv/freesurfer/sub-{subject}/mri/orig/001.mgz', subject=subjects)
+        # expand('deriv/freesurfer/sub-{subject}/scripts/recon-all.done', subject=subjects)
+
+# BIDSify data
+# include: 'rules/bids.smk'
+
+# Other rules, e.g., MP2RAGE processing
+include: 'rules/mp2rage.smk'
+
+# Generate dummy fieldmap volumes for SDC by fMRIprep
+# include: 'rules/rsfmri.smk'
