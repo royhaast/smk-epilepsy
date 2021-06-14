@@ -7,6 +7,8 @@
 /deriv/*
 /tar/*
 /logs/*
+/tmp/*
+/logs/*
 /scripts/presurfer/spm12/*
 /scripts/skullstripping/*
 /scripts/mprageise/*
