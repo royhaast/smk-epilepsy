@@ -1,0 +1,241 @@
+CMD: singularity exec /project/6050199/akhanf/singularity/bids-apps/pwighton_freesurfer_7.1.0.sif export SUBJECTS_DIR=/scratch/rhaast/epilepsy/deriv/freesurfer
+INFO: hi-res volumes are conformed to the min voxel size
+ERROR: cannot find /project/6050199/rhaast/01_Software/freesurfer/7.1.1/subjects/sub-001_std_uni-den
+START_TIME: Mon Jun 14 09:57:01 EDT 2021
+INFO: hi-res volumes are conformed to the min voxel size
+Subject Stamp: freesurfer-linux-centos6_x86_64-7.1.0-20200511-813297b
+Current Stamp: freesurfer-linux-centos6_x86_64-7.1.0-20200511-813297b
+INFO: SUBJECTS_DIR is /scratch/rhaast/epilepsy/deriv/freesurfer
+Actual FREESURFER_HOME /opt/freesurfer-7.1.0
+Linux gra634 3.10.0-1127.8.2.el7.x86_64 #1 SMP Tue May 12 16:57:42 UTC 2020 x86_64 GNU/Linux
+nu_correct: Command not found.
+'/opt/freesurfer-7.1.0/bin/recon-all' -> '/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/scripts/recon-all.local-copy'
+#--------------------------------------------
+#@# MotionCor Mon 14 Jun 2021 09:57:06 AM EDT
+Found 1 runs
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/orig/001.mgz
+Checking for (invalid) multi-frame inputs...
+Only one run found so motion
+correction will not be performed. I'll
+copy the run to rawavg and continue.
+
+ cp /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/orig/001.mgz /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/rawavg.mgz 
+
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den
+
+ mri_convert /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/rawavg.mgz /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/orig.mgz --conform_min 
+
+mri_convert /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/rawavg.mgz /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/orig.mgz --conform_min 
+reading from /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/rawavg.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (0.971801, -0.168731, -0.164722)
+j_ras = (0.171068, 0.985259, -1.78577e-08)
+k_ras = (0.162294, -0.0281786, 0.98634)
+changing data type from float to uchar (noscale = 0)...
+MRIchangeType: Building histogram -0.000542923 830.911 1000, flo=0, fhi=0.999, dest_type=0
+Reslicing using trilinear interpolation 
+writing to /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/orig.mgz...
+
+ mri_add_xform_to_header -c /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/transforms/talairach.xfm /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/orig.mgz /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/orig.mgz 
+
+INFO: extension is mgz
+#--------------------------------------------
+#@# Talairach Mon 14 Jun 2021 09:57:37 AM EDT
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri
+
+ mri_nu_correct.mni --no-rescale --i orig.mgz --o orig_nu.mgz --ants-n4 --n 1 --proto-iters 1000 --distance 50 
+
+/usr/bin/bc
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri
+/opt/freesurfer-7.1.0/bin/mri_nu_correct.mni
+--no-rescale --i orig.mgz --o orig_nu.mgz --ants-n4 --n 1 --proto-iters 1000 --distance 50
+nIters 1
+mri_nu_correct.mni 7.1.0
+Linux gra634 3.10.0-1127.8.2.el7.x86_64 #1 SMP Tue May 12 16:57:42 UTC 2020 x86_64 GNU/Linux
+Mon 14 Jun 2021 09:57:37 AM EDT
+Found /dev/shm , will use for temp dir
+tmpdir is /dev/shm/tmp.mri_nu_correct.mni.26161
+cd /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri
+AntsN4BiasFieldCorrectionFs -i orig.mgz -o /dev/shm/tmp.mri_nu_correct.mni.26161/nu0.mgz
+Using shrink factor: 4
+mri_convert /dev/shm/tmp.mri_nu_correct.mni.26161/nu0.mgz orig_nu.mgz --like orig.mgz --conform
+mri_convert /dev/shm/tmp.mri_nu_correct.mni.26161/nu0.mgz orig_nu.mgz --like orig.mgz --conform 
+reading from /dev/shm/tmp.mri_nu_correct.mni.26161/nu0.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, -4.6799e-09, -2.49594e-08)
+j_ras = (0, -3.11993e-09, -1)
+k_ras = (1.79396e-08, 1, -3.11993e-09)
+INFO: transform src into the like-volume: orig.mgz
+writing to orig_nu.mgz...
+ 
+ 
+Mon 14 Jun 2021 10:09:17 AM EDT
+mri_nu_correct.mni done
+
+ talairach_avi --i orig_nu.mgz --xfm transforms/talairach.auto.xfm 
+
+talairach_avi log file is transforms/talairach_avi.log...
+Started at Mon 14 Jun 2021 10:09:17 AM EDT
+Ended   at Mon 14 Jun 2021 10:10:39 AM EDT
+talairach_avi done
+
+ cp transforms/talairach.auto.xfm transforms/talairach.xfm 
+
+lta_convert --src orig.mgz --trg /opt/freesurfer-7.1.0/average/mni305.cor.mgz --inxfm transforms/talairach.xfm --outlta transforms/talairach.xfm.lta --subject fsaverage --ltavox2vox
+7.1.0
+
+--src: orig.mgz src image (geometry).
+--trg: /opt/freesurfer-7.1.0/average/mni305.cor.mgz trg image (geometry).
+--inmni: transforms/talairach.xfm input MNI/XFM transform.
+--outlta: transforms/talairach.xfm.lta output LTA.
+--s: fsaverage subject name
+--ltavox2vox: output LTA as VOX_TO_VOX transform.
+ LTA read, type : 1
+ 1.15253  -0.20569  -0.21776  -12.97835;
+ 0.21620   1.31367   0.27999  -37.67619;
+ 0.12379  -0.57418   1.31295   36.19081;
+ 0.00000   0.00000   0.00000   1.00000;
+setting subject to fsaverage
+Writing  LTA to file transforms/talairach.xfm.lta...
+lta_convert successful.
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/transforms /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri 
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri 
+#--------------------------------------------
+#@# Nu Intensity Correction Mon 14 Jun 2021 10:10:45 AM EDT
+
+ mri_nu_correct.mni --i orig.mgz --o nu.mgz --uchar transforms/talairach.xfm --cm --n 2 --ants-n4 
+
+/usr/bin/bc
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri
+/opt/freesurfer-7.1.0/bin/mri_nu_correct.mni
+--i orig.mgz --o nu.mgz --uchar transforms/talairach.xfm --cm --n 2 --ants-n4
+nIters 2
+mri_nu_correct.mni 7.1.0
+Linux gra634 3.10.0-1127.8.2.el7.x86_64 #1 SMP Tue May 12 16:57:42 UTC 2020 x86_64 GNU/Linux
+Mon 14 Jun 2021 10:10:46 AM EDT
+Found /dev/shm , will use for temp dir
+tmpdir is /dev/shm/tmp.mri_nu_correct.mni.27674
+cd /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri
+AntsN4BiasFieldCorrectionFs -i orig.mgz -o /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz
+Using shrink factor: 4
+mri_binarize --i /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz --min -1 --o /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz
+
+7.1.0
+cwd /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri
+cmdline mri_binarize --i /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz --min -1 --o /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz 
+sysname  Linux
+hostname gra634
+machine  x86_64
+user     rhaast
+
+input      /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz
+frame      0
+nErode3d   0
+nErode2d   0
+output     /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz
+Binarizing based on threshold
+min        -1
+max        +infinity
+binval        1
+binvalnot     0
+fstart = 0, fend = 0, nframes = 1
+Found 64964808 values in range
+Counting number of voxels in first frame
+Found 64964807 voxels in final mask
+Count: 64964807 13823993.739415 64964808 99.999998
+mri_binarize done
+mri_segstats --id 1 --seg /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz --i orig.mgz --sum /dev/shm/tmp.mri_nu_correct.mni.27674/sum.junk --avgwf /dev/shm/tmp.mri_nu_correct.mni.27674/input.mean.dat
+
+7.1.0
+cwd 
+cmdline mri_segstats --id 1 --seg /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz --i orig.mgz --sum /dev/shm/tmp.mri_nu_correct.mni.27674/sum.junk --avgwf /dev/shm/tmp.mri_nu_correct.mni.27674/input.mean.dat 
+sysname  Linux
+hostname gra634
+machine  x86_64
+user     rhaast
+whitesurfname  white
+UseRobust  0
+Loading /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz
+Loading orig.mgz
+Voxel Volume is 0.212792 mm^3
+Generating list of segmentation ids
+Found   1 segmentations
+Computing statistics for each segmentation
+
+Reporting on   1 segmentations
+Using PrintSegStat
+Computing spatial average of each frame
+  0
+Writing to /dev/shm/tmp.mri_nu_correct.mni.27674/input.mean.dat
+mri_segstats done
+mri_segstats --id 1 --seg /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz --i /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz --sum /dev/shm/tmp.mri_nu_correct.mni.27674/sum.junk --avgwf /dev/shm/tmp.mri_nu_correct.mni.27674/output.mean.dat
+
+7.1.0
+cwd 
+cmdline mri_segstats --id 1 --seg /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz --i /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz --sum /dev/shm/tmp.mri_nu_correct.mni.27674/sum.junk --avgwf /dev/shm/tmp.mri_nu_correct.mni.27674/output.mean.dat 
+sysname  Linux
+hostname gra634
+machine  x86_64
+user     rhaast
+whitesurfname  white
+UseRobust  0
+Loading /dev/shm/tmp.mri_nu_correct.mni.27674/ones.mgz
+Loading /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz
+Voxel Volume is 0.212792 mm^3
+Generating list of segmentation ids
+Found   1 segmentations
+Computing statistics for each segmentation
+
+Reporting on   1 segmentations
+Using PrintSegStat
+Computing spatial average of each frame
+  0
+Writing to /dev/shm/tmp.mri_nu_correct.mni.27674/output.mean.dat
+mri_segstats done
+mris_calc -o /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz mul .99929112789775949418
+Saving result to '/dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz' (type = MGH )                       [ ok ]
+mri_convert /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz nu.mgz --like orig.mgz
+mri_convert /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz nu.mgz --like orig.mgz 
+reading from /dev/shm/tmp.mri_nu_correct.mni.27674/nu0.mgz...
+TR=0.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, -4.6799e-09, -2.49594e-08)
+j_ras = (0, -3.11993e-09, -1)
+k_ras = (1.79396e-08, 1, -3.11993e-09)
+INFO: transform src into the like-volume: orig.mgz
+writing to nu.mgz...
+mri_make_uchar nu.mgz transforms/talairach.xfm nu.mgz
+type change took 0 minutes and 28 seconds.
+mapping ( 8, 237) to ( 3, 110)
+ 
+ 
+Mon 14 Jun 2021 10:23:57 AM EDT
+mri_nu_correct.mni done
+
+ mri_add_xform_to_header -c /scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri/transforms/talairach.xfm nu.mgz nu.mgz 
+
+INFO: extension is mgz
+#--------------------------------------------
+#@# Intensity Normalization Mon 14 Jun 2021 10:23:59 AM EDT
+/scratch/rhaast/epilepsy/deriv/freesurfer/sub-001_b1+biascorr+stripmasked_uni-den/mri
+
+ mri_normalize -g 1 -seed 1234 -mprage -noconform nu.mgz T1.mgz 
+
+using max gradient = 1.000
+setting seed for random number genererator to 1234
+assuming input volume is MGH (Van der Kouwe) MP-RAGE
+not interpolating and embedding volume to be 256^3...
+reading mri_src from nu.mgz...
+normalizing image...
+talairach transform
+ 1.15253  -0.20569  -0.21776  -12.97835;
+ 0.21620   1.31367   0.27999  -37.67619;
+ 0.12379  -0.57418   1.31295   36.19081;
+ 0.00000   0.00000   0.00000   1.00000;
+processing without aseg, no1d=0
+MRInormInit(): 
+INFO: Modifying talairach volume c_(r,a,s) based on average_305
+MRInormalize(): 
+error: No such file or directory
+error: MRIhistogramRegion: input mri nu.mgz is blank 
+MRIsplineNormalize(): npeaks = 19
+Starting OpenSpline(): npoints = 19

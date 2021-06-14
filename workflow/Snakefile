@@ -18,8 +18,8 @@ rule all:
     input:
         # expand('tar/sub-{subject}/sub-{subject}_tar.files', subject=subjects),
         # expand('bids/sub-{subject}/tar2bids.done', subject=subjects),
-        expand('deriv/freesurfer/sub-{subject}/mri/orig/001.mgz', subject=subjects)
-        # expand('deriv/freesurfer/sub-{subject}/scripts/recon-all.done', subject=subjects)
+        # expand('deriv/freesurfer/sub-{subject}/mri/orig/001.mgz', subject=subjects)
+        expand('deriv/freesurfer/sub-{subject}/scripts/recon-all.done', subject=subjects)
 
 # BIDSify data
 # include: 'rules/bids.smk'

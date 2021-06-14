@@ -126,7 +126,7 @@ rule ants_denoise:
         mask = 'deriv/presurfer/sub-{subject}/presurf_MPRAGEise/presurf_UNI/sub-{subject}_acq-UNI_run-01_proc-B1map_MP2RAGE_MPRAGEised_brainmask.nii'
     output:
         denoised = 'deriv/presurfer/sub-{subject}/sub-{subject}_acq-MP2RAGE_run-01_proc-B1map_T1w.nii.gz',
-        mgz = 'deriv/freesurfer/sub-{subject}/mri/orig/001.mgz'
+        # mgz = 'deriv/freesurfer/sub-{subject}/mri/orig/001.mgz'
     group: 'mp2rage'        
     container: config['containers']['fmriprep']
     threads: 8
@@ -136,7 +136,38 @@ rule ants_denoise:
     shell:
         """
         DenoiseImage -d 3 -i {input.t1w} -n Rician -s 1 -o {output.denoised} -v
-        mri_mask {output.denoised} {input.mask} {output.mgz}
+        """
+
+rule generate_stripmask:
+    input:
+        expand('deriv/presurfer/sub-{{subject}}/presurf_INV2/sub-{{subject}}_inv-2_run-01_part-mag_MP2RAGE.nii_class{i}.nii', i=range(3,7))
+    output: 'deriv/presurfer/sub-{subject}/presurf_INV2/sub-{subject}_inv-2_run-01_part-mag_MP2RAGE_stripmask.nii.gz'
+    container: config['containers']['fmriprep']
+    shell:
+        """
+        wb_command -volume-math '(1-((x1+x2+x3+x4)>0.5))' {output} -fixnan 0 -var x1 {input[0]} -var x2 {input[1]} -var x3 {input[2]} -var x4 {input[3]}
+        """
+
+rule mask_t1w:
+    input:
+        t1w = 'deriv/presurfer/sub-{subject}/sub-{subject}_acq-MP2RAGE_run-01_proc-B1map_T1w.nii.gz',
+        mask = 'deriv/presurfer/sub-{subject}/presurf_INV2/sub-{subject}_inv-2_run-01_part-mag_MP2RAGE_stripmask.nii.gz'
+    output: 'deriv/presurfer/sub-{subject}/sub-{subject}_acq-MP2RAGE_run-01_proc-B1map+PreSurfer_T1w.nii.gz'
+    container: config['containers']['fmriprep']
+    shell:
+        """
+        fslmaths {input.t1w} -mul {input.mask} {output}
+        """
+
+rule gradcorrect_t1w:
+    input:
+        t1w = 'deriv/presurfer/sub-{subject}/sub-{subject}_acq-MP2RAGE_run-01_proc-B1map+PreSurfer_T1w.nii.gz',
+        warp = 'deriv/gradcorrect/sourcedata/gradcorrect/sub-{subject}/anat/sub-{subject}_acq-MP2RAGE_run-01_T1w_target-nativeGC_warp.nii.gz'
+    output: 'deriv/presurfer/sub-{subject}/sub-{subject}_acq-MP2RAGE_run-01_proc-B1map+PreSurfer+GDC_T1w.nii.gz',
+    container: config['containers']['fmriprep']
+    shell:
+        """
+        applywarp -i {input.t1w} -o {output} -r {input.t1w} -w {input.warp} --abs --interp=spline
         """
 
 # Will process the denoised image using FreeSurfer
@@ -153,8 +184,8 @@ rule freesurfer:
         mem_mb = 64000
     shell:
         """
-        export SUBJECTS_DIR={params.sd}
-        recon-all -all -s sub-{wildcards.subject} -hires -no-wsgcaatlas -notal-check -threads 16
+        # export SUBJECTS_DIR={params.sd}
+        recon-all -all -s sub-{wildcards.subject} -hires -no-wsgcaatlas -notal-check -threads 16 -sd {params.sd}
         """
 
 

@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=32000
+#SBATCH --time=24:00:00
+#SBATCH --job-name=freesurfer
+#SBATCH --account=ctb-akhanf-ab
+#SBATCH --output=/scratch/rhaast/epilepsy/jobs/freesurfer.b1+biascorr+stripmasked_uni-den.out
+echo CMD: singularity exec /project/6050199/akhanf/singularity/bids-apps/pwighton_freesurfer_7.1.0.sif export SUBJECTS_DIR=/scratch/rhaast/epilepsy/deriv/freesurfer ; recon-all -all -s sub-001_std_uni-den -hires -no-wsgcaatlas -notal-check -threads 8
+echo START_TIME: `date`
+cd /home/rhaast/scratch/epilepsy
+singularity exec /project/6050199/akhanf/singularity/bids-apps/pwighton_freesurfer_7.1.0.sif recon-all -all -s sub-001_b1+biascorr+stripmasked_uni-den -hires -no-wsgcaatlas -notal-check -threads 16 -sd /scratch/rhaast/epilepsy/deriv/freesurfer
+RETURNVAL=$?
+echo RETURNVAL=$RETURNVAL
+echo END_TIME: `date`
+exit $RETURNVAL
